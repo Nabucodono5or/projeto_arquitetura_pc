@@ -5,10 +5,10 @@ from monitoramento import cpu
 from monitoramento import disks
 from monitoramento import rede
 
-azul = (0, 0, 255)
-vermelho = (255, 0, 0)
-preto = (0, 0, 0)
-branco = (255, 255, 255)
+azul = (246, 244, 243)
+vermelho = (236, 11, 67)
+preto = (84, 151, 167)
+branco = (248, 241, 255)
 
 largura_tela = 800
 altura_tela = 600
@@ -17,6 +17,7 @@ pygame.font.init()
 font = pygame.font.Font(None, 35)
 
 tela = pygame.display.set_mode((largura_tela,altura_tela))
+tela.fill(preto)
 pygame.display.set_caption("Monitoramento de estado do PC")
 
 def info_display(t):
