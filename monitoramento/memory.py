@@ -28,15 +28,15 @@ def usado_mb():
 
 
 def total_gb():
-    return round(psutil.virtual_memory().total / fator_gb)
+    return round(psutil.virtual_memory().total / fator_gb, 2)
 
 
 def livre_gb():
-    return round(psutil.virtual_memory().free / fator_gb)
+    return round(psutil.virtual_memory().free / fator_gb, 2)
 
 
 def usado_gb():
-    return round(psutil.virtual_memory().used / fator_gb)
+    return round(psutil.virtual_memory().used / fator_gb, 2)
 
 
 '''
