@@ -20,12 +20,23 @@ tela = pygame.display.set_mode((largura_tela,altura_tela))
 pygame.display.set_caption("Monitoramento de estado do PC")
 
 def info_display(t):
+    # larg = largura_tela - 2 * 20
+    # pygame.draw.rect(t, preto, (20, 20, larg, 70))
+    t.fill(preto)
     texto_processador = str(cpu.nome_cpu())
-    texto_cores = "Cores: " + cpu.cores()
-    texto_rede = "IP Adress: " + rede.get_ip_address()
-    texto_resultado = texto_processador + "/n" + texto_cores + "/n" + texto_rede
-    texto_resultado = font.render(texto_resultado, 1, branco)
-    t.blit(texto_resultado, (20, 10))
+    texto_cores = "Cores: " + str(cpu.cores())
+    texto_rede = "Endereço IP: " + str(rede.get_ip_address())
+
+    texto_final = font.render(texto_processador, True, branco)
+    t.blit(texto_final, (20, 10))
+
+    texto_final = font.render(texto_cores, True, branco)
+    t.blit(texto_final, (20, 40))
+
+    texto_final = font.render(texto_rede, True, branco)
+    t.blit(texto_final, (20, 70))
+
+    tela.blit(t, (0, 10))
 
 def disks_display(t):
     d = disks.porcentagem_de_uso()
@@ -38,7 +49,7 @@ def disks_display(t):
     texto_titulo = "Consumo de Disco ( Total: " + str(total) + " GB):"
     texto_final = font.render(texto_titulo, 1, branco)
     t.blit(texto_final, (20, 10))
-    tela.blit(t, (0, 2*altura_tela/3))
+    tela.blit(t, (0, 3*altura_tela/4))
 
 
 def cpu_display(t):
@@ -52,7 +63,7 @@ def cpu_display(t):
     texto_titulo = "Consumo de cpu ( Frequencia: " + str(total) + " GHz):"
     texto_final = font.render(texto_titulo, 1, branco)
     t.blit(texto_final, (20, 10))
-    tela.blit(t, (0, altura_tela/3))
+    tela.blit(t, (0, altura_tela/4))
 
 
 def memoria_display(t):
@@ -66,14 +77,14 @@ def memoria_display(t):
     texto_titulo = "Consumo de memoria ( Total: " + str(total) + " GB):"
     texto_final = font.render(texto_titulo, 1, branco)
     t.blit(texto_final, (20, 10))
-    tela.blit(t, (0, 0))
+    tela.blit(t, (0, 2*altura_tela/4))
 
 pygame.display.init()
 
-
-s1 = Surface((largura_tela, altura_tela/3))
-s2 = Surface((largura_tela, altura_tela/3))
-s3 = Surface((largura_tela, altura_tela/3))
+s0 = Surface((largura_tela, altura_tela/4))
+s1 = Surface((largura_tela, altura_tela/4))
+s2 = Surface((largura_tela, altura_tela/4))
+s3 = Surface((largura_tela, altura_tela/4))
 
 clock = pygame.time.Clock()
 contador = 60
@@ -87,7 +98,7 @@ while not terminou:
             terminou = True
 
     if contador == 60:
-
+        info_display(s0)
         memoria_display(s1)
         cpu_display(s2)
         disks_display(s3)
