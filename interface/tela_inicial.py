@@ -80,33 +80,36 @@ def memoria_display(t):
     t.blit(texto_final, (20, 10))
     tela.blit(t, (0, 2*altura_tela/4))
 
-pygame.display.init()
+def iniciar_app():
+    pygame.display.init()
 
-s0 = Surface((largura_tela, altura_tela/4))
-s1 = Surface((largura_tela, altura_tela/4))
-s2 = Surface((largura_tela, altura_tela/4))
-s3 = Surface((largura_tela, altura_tela/4))
+    s0 = Surface((largura_tela, altura_tela/4))
+    s1 = Surface((largura_tela, altura_tela/4))
+    s2 = Surface((largura_tela, altura_tela/4))
+    s3 = Surface((largura_tela, altura_tela/4))
 
-clock = pygame.time.Clock()
-contador = 60
+    clock = pygame.time.Clock()
+    contador = 60
 
-terminou = False
+    terminou = False
 
-while not terminou:
+    while not terminou:
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            terminou = True
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminou = True
 
-    if contador == 60:
-        info_display(s0)
-        memoria_display(s1)
-        cpu_display(s2)
-        disks_display(s3)
-        contador = 0
+        if contador == 60:
+            info_display(s0)
+            memoria_display(s1)
+            cpu_display(s2)
+            disks_display(s3)
+            contador = 0
 
-    pygame.display.update()
-    clock.tick(60)
-    contador = contador + 1
+        pygame.display.update()
+        clock.tick(60)
+        contador = contador + 1
 
-pygame.display.quit()
+    pygame.display.quit()
+
+iniciar_app()
