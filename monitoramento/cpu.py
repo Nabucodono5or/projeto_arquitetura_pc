@@ -1,9 +1,10 @@
 import psutil
-import platform
 import os
 import cpuinfo
 
 info = cpuinfo.get_cpu_info()
+
+
 # modulo de operaçoes para cheque da cpu
 
 def frequencia():
@@ -11,26 +12,11 @@ def frequencia():
 
 
 def nome_cpu():
-    # if sistema_operacional() == 'Linux':
-    #     return busca_info_arq()
-    # return platform.processor()
     return info['brand']
 
 
 def sistema_operacional():
     return os.uname().sysname
-
-
-def busca_info_arq():
-    with open('/proc/cpuinfo') as f:
-        for line in f:
-            if line.strip():
-                if line.rstrip('\n').startswith('model name'):
-                    model_name = line.rstrip('\n').split(':')[1]
-                    model = model_name
-                    model = model.strip()
-                    break
-    return model + " " + platform.processor()
 
 
 def cores():
@@ -42,7 +28,7 @@ def cores_fisicos():
 
 
 def consumo_cpu_percentagem():
-    return psutil.cpu_times_percent(interval=1)
+    return psutil.cpu_times_percent()
 
 
 def consumo_cpu_porcentagem_formatado():
@@ -53,8 +39,10 @@ def consumo_cpu_porcentagem_formatado():
 def cpu_livre_porcentagem():
     return consumo_cpu_percentagem().idle
 
+
 def arquitetura():
     return info['arch']
+
 
 def palavra():
     return info['bits']

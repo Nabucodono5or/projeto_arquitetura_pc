@@ -1,4 +1,3 @@
-
 '''
     ** versão de uso do terminal como display e entrada de controle da visualição  
 '''
@@ -47,11 +46,25 @@ def imprimir_info_disco():
     print("___________________")
     print()
 
+
 def imprimir_info_rede():
     print()
     print("___________________")
     print("REDE")
     print("Endereço IP: ", rede.ip_adress())
+    print("___________________")
+    print()
+
+
+def imprimir_resumo():
+    print()
+    print("___________________")
+    print("Processador: " + str(cpu.nome_cpu()))
+    print("Velocidade: {} GHz".format(cpu.frequencia()))
+    print("Arquitetura do processador: " + str(cpu.arquitetura()))
+    print("Total  de memória: {} GB".format(memory.total_gb()))
+    print("Total do disco: {} GB".format(disks.total_gb()))
+    print("Endereço IP: {}".format(rede.get_ip_address()))
     print("___________________")
     print()
 
@@ -69,15 +82,17 @@ def iniciar_app():
         print()
         resultado = input("Entre com a informação que você queira: ")
 
-        if resultado == "cpu" :
+        if resultado == "cpu":
             imprimir_info_cpu()
-        elif resultado == "mem" or resultado == "memoria" :
+        elif resultado == "mem" or resultado == "memoria":
             imprimir_info_memoria()
-        elif resultado == "disco" :
+        elif resultado == "disco":
             imprimir_info_disco()
-        elif resultado == "ip" :
+        elif resultado == "ip":
             imprimir_info_rede()
-        elif resultado == "q" or "quit" :
+        elif resultado == "resumo" or resultado == "t":
+            imprimir_resumo()
+        elif resultado == "q" or "quit":
             quit = True
 
 
