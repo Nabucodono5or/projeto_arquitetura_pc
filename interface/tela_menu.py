@@ -24,10 +24,12 @@ pygame.display.set_caption("Monitoramento de estado do PC")
 
 def menu_display(t):
     t.fill(preto)
+
     mostra_texto(t, "Digite 1 para informações da CPU.", 10)
     mostra_texto(t, "Digite 2 para informações de MEMÓRIA.", 30)
     mostra_texto(t, "Digite 3 para informações de DISCO.", 50)
     mostra_texto(t, "Digite 4 para informações da REDE.", 70)
+    mostra_texto(t, "Digite 5 para informação RESUMIDA.", 90)
 
     tela.blit(t, (0, 10))
 
@@ -46,6 +48,48 @@ def info_cpu_display(t):
     mostra_texto(t, "Cores (Físicos): {} ({})".format(cpu.cores(), cpu.cores_fisicos()), 90)
 
     tela.blit(t, (0, altura_tela/3))
+
+def info_memoria_display(t):
+    t.fill(preto)
+
+    mostra_texto(t, "Total  de memória: {} GB".format(memory.total_gb()), 10)
+    mostra_texto(t, "Total de memória swap: {} GB".format(memory.memoria_swap()), 30)
+    mostra_texto(t, "Memória swap usada: {} GB".format(memory.memoria_swap_usada()), 50)
+    mostra_texto(t, "Consumo atual da memória: {}%".format(memory.porcentagem()), 70)
+
+    tela.blit(t, (0, altura_tela/3))
+
+
+def info_disco_display(t):
+    t.fill(preto)
+
+    mostra_texto(t, "Total do disco: {} GB".format(disks.total_gb()), 10)
+    mostra_texto(t, "Total de disco em uso: {} GB".format(disks.usado_gb()), 30)
+    mostra_texto(t, "Total de espaço livre em disco: {} GB".format(disks.livre_gb()), 50)
+    mostra_texto(t, "Consumo atual do disco: {}%".format(disks.porcentagem_de_uso()), 70)
+
+    tela.blit(t, (0, altura_tela/3))
+
+def info_rede_display(t):
+    t.fill(preto)
+
+    mostra_texto(t, "Endereço IP: {}".format(rede.get_ip_address()), 10)
+
+    tela.blit(t, (0, altura_tela/3))
+
+def info_resumo_display(t):
+    t.fill(preto)
+
+    mostra_texto(t, "Processador: "+ str(cpu.nome_cpu()), 10)
+    mostra_texto(t, "Velocidade: {} GHz".format(cpu.frequencia()), 30)
+    mostra_texto(t, "Arquitetura do processador: " + str(cpu.arquitetura()), 50)
+    mostra_texto(t, "Total  de memória: {} GB".format(memory.total_gb()), 70)
+    mostra_texto(t, "Total de memória swap: {} GB".format(memory.memoria_swap()), 90)
+    mostra_texto(t, "Total do disco: {} GB".format(disks.total_gb()), 110)
+    mostra_texto(t, "Endereço IP: {}".format(rede.get_ip_address()), 130)
+
+    tela.blit(t, (0, altura_tela/3))
+
 
 # def info_display(t):
 #     # larg = largura_tela - 2 * 20
@@ -66,20 +110,20 @@ def info_cpu_display(t):
 #
 #     tela.blit(t, (0, 10))
 #
-# def disks_display(t):
-#     d = disks.porcentagem_de_uso()
-#     larg = largura_tela - 2*20
-#     t.fill(preto)
-#     pygame.draw.rect(t, azul, (20, 50, larg, 70))
-#     larg = larg * d/100
-#     pygame.draw.rect(t, vermelho, (20, 50, larg, 70))
-#     total = disks.total_gb()
-#     texto_titulo = "Consumo de Disco ( Total: " + str(total) + " GB):"
-#     texto_final = font.render(texto_titulo, 1, branco)
-#     t.blit(texto_final, (20, 10))
-#     tela.blit(t, (0, 3*altura_tela/4))
-#
-#
+def disks_display(t):
+    d = disks.porcentagem_de_uso()
+    larg = largura_tela - 2*20
+    t.fill(preto)
+    pygame.draw.rect(t, azul, (20, 50, larg, 70))
+    larg = larg * d/100
+    pygame.draw.rect(t, vermelho, (20, 50, larg, 70))
+    total = disks.total_gb()
+    texto_titulo = "Consumo de Disco ( Total: " + str(total) + " GB):"
+    texto_final = font.render(texto_titulo, 1, branco)
+    t.blit(texto_final, (20, 10))
+    tela.blit(t, (0, 3*altura_tela/4))
+
+
 def cpu_display(t):
     procss = cpu.consumo_cpu_porcentagem_formatado()
     larg = largura_tela - 2*20
@@ -94,18 +138,18 @@ def cpu_display(t):
     tela.blit(t, (0, 2*altura_tela/3))
 
 
-# def memoria_display(t):
-#     mem = memory.porcentagem()
-#     larg = largura_tela - 2*20
-#     t.fill(preto)
-#     pygame.draw.rect(t, azul, (20, 50, larg, 70))
-#     larg = larg * mem/100
-#     pygame.draw.rect(t, vermelho, (20, 50, larg, 70))
-#     total = memory.total_gb()
-#     texto_titulo = "Consumo de memoria ( Total: " + str(total) + " GB):"
-#     texto_final = font.render(texto_titulo, 1, branco)
-#     t.blit(texto_final, (20, 10))
-#     tela.blit(t, (0, 2*altura_tela/4))
+def memoria_display(t):
+    mem = memory.porcentagem()
+    larg = largura_tela - 2*20
+    t.fill(preto)
+    pygame.draw.rect(t, azul, (20, 50, larg, 70))
+    larg = larg * mem/100
+    pygame.draw.rect(t, vermelho, (20, 50, larg, 70))
+    total = memory.total_gb()
+    texto_titulo = "Consumo de memoria ( Total: " + str(total) + " GB):"
+    texto_final = font.render(texto_titulo, 1, branco)
+    t.blit(texto_final, (20, 10))
+    tela.blit(t, (0, 2*altura_tela/3))
 
 def iniciar_app():
     pygame.display.init()
@@ -120,6 +164,7 @@ def iniciar_app():
 
     terminou = False
 
+    opcao = 5
     while not terminou:
 
         for event in pygame.event.get():
@@ -127,14 +172,23 @@ def iniciar_app():
                 terminou = True
 
         if contador == 60:
-            # info_display(s0)
-            # memoria_display(s1)
-            # cpu_display(s2)
-            # disks_display(s3)
             menu_display(s0)
-            info_cpu_display(s1)
-            cpu_display(s2)
+
+            if opcao == 1 :
+                info_cpu_display(s1)
+                cpu_display(s2)
+            elif opcao == 2 :
+                info_memoria_display(s1)
+                memoria_display(s2)
+            elif opcao == 3 :
+                info_disco_display(s1)
+                disks_display(s2)
+            elif opcao == 4 :
+                info_rede_display(s1)
+            elif opcao == 5 :
+                info_resumo_display(s1)
             contador = 0
+
 
         pygame.display.update()
         clock.tick(60)
