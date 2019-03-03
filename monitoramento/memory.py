@@ -46,3 +46,13 @@ def usado_gb():
 
 def porcentagem():
     return psutil.virtual_memory().percent
+
+'''
+    Outras informações
+'''
+
+def memoria_swap():
+    return round(psutil.swap_memory().total / fator_gb)
+
+def memoria_swap_usada():
+    return round(psutil.swap_memory().used / fator_gb)

@@ -18,14 +18,19 @@ print('Cores (físicos): ', cpu.cores(), '(', cpu.cores_fisicos(), ')')
 print("___________________")
 
 
-# print("Cores fìsicos: ", cpu.cores_fisicos())
-# print("Total  de memória: ", memory.total_gb(), "GB")
-# print("Total do disco: ", disks.total_gb(), "GB")
-# print("Total de disco em uso: ", disks.usado_gb(), "GB")
-# print("Total de espaço livre em disco: ", disks.livre_gb(), "GB")
-# print("Informações de rede: ", rede.ip_adress())
+print("Total  de memória: ", memory.total_gb(), "GB")
+print("Total de memória swap: ", memory.memoria_swap(), "GB")
+print("Memória swap usada: ", memory.memoria_swap_usada(), "GB")
+print("___________________")
+
+print("Total do disco: ", disks.total_gb(), "GB")
+print("Total de disco em uso: ", disks.usado_gb(), "GB")
+print("Total de espaço livre em disco: ", disks.livre_gb(), "GB")
+print("___________________")
+
+print("Endereço IP: ", rede.ip_adress())
 # print()
-# print("___________________")
+print("___________________")
 
 
 # def imprimir_consumo(t):
