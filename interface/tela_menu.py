@@ -36,6 +36,16 @@ def mostra_texto(t, texto, pos_y):
     texto_final = font_info.render(texto, True, branco)
     t.blit(texto_final, (10, pos_y))
 
+def info_cpu_display(t):
+    t.fill(preto)
+
+    mostra_texto(t, "Processador: "+ str(cpu.nome_cpu()), 10)
+    mostra_texto(t, "Arquitetura: " + str(cpu.arquitetura()), 30)
+    mostra_texto(t, "Palavra: " + str(cpu.palavra()) + "bits", 50)
+    mostra_texto(t, "Velocidade: {} GHz".format(cpu.frequencia()), 70)
+    mostra_texto(t, "Cores (Físicos): {} ({})".format(cpu.cores(), cpu.cores_fisicos()), 90)
+
+    tela.blit(t, (0, altura_tela/3))
 
 # def info_display(t):
 #     # larg = largura_tela - 2 * 20
@@ -70,20 +80,20 @@ def mostra_texto(t, texto, pos_y):
 #     tela.blit(t, (0, 3*altura_tela/4))
 #
 #
-# def cpu_display(t):
-#     procss = cpu.consumo_cpu_porcentagem_formatado()
-#     larg = largura_tela - 2*20
-#     t.fill(preto)
-#     pygame.draw.rect(t, azul, (20, 50, larg, 70))
-#     larg = larg * procss/100
-#     pygame.draw.rect(t, vermelho, (20, 50, larg, 70))
-#     total = cpu.frequencia()
-#     texto_titulo = "Consumo de cpu ( Frequencia: " + str(total) + " GHz):"
-#     texto_final = font.render(texto_titulo, 1, branco)
-#     t.blit(texto_final, (20, 10))
-#     tela.blit(t, (0, altura_tela/4))
-#
-#
+def cpu_display(t):
+    procss = cpu.consumo_cpu_porcentagem_formatado()
+    larg = largura_tela - 2*20
+    t.fill(preto)
+    pygame.draw.rect(t, azul, (20, 50, larg, 70))
+    larg = larg * procss/100
+    pygame.draw.rect(t, vermelho, (20, 50, larg, 70))
+    total = cpu.frequencia()
+    texto_titulo = "Consumo de cpu ( Frequencia: " + str(total) + " GHz):"
+    texto_final = font.render(texto_titulo, 1, branco)
+    t.blit(texto_final, (20, 10))
+    tela.blit(t, (0, 2*altura_tela/3))
+
+
 # def memoria_display(t):
 #     mem = memory.porcentagem()
 #     larg = largura_tela - 2*20
@@ -101,8 +111,8 @@ def iniciar_app():
     pygame.display.init()
 
     s0 = Surface((largura_tela, altura_tela/3))
-    # s1 = Surface((largura_tela, altura_tela/4))
-    # s2 = Surface((largura_tela, altura_tela/4))
+    s1 = Surface((largura_tela, altura_tela/3))
+    s2 = Surface((largura_tela, altura_tela/3))
     # s3 = Surface((largura_tela, altura_tela/4))
 
     clock = pygame.time.Clock()
@@ -122,6 +132,8 @@ def iniciar_app():
             # cpu_display(s2)
             # disks_display(s3)
             menu_display(s0)
+            info_cpu_display(s1)
+            cpu_display(s2)
             contador = 0
 
         pygame.display.update()
