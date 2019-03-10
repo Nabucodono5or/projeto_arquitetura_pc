@@ -17,7 +17,7 @@ cpuinfo.
 
 ### Imagens
 
- 
+ ![tela inicial da interface](recursos/monitoramento.png)
  
 ### Detalhes
  
