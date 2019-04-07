@@ -1,12 +1,20 @@
 '''
     ** versão de uso do terminal como display e entrada de controle da visualição  
 '''
-
+import datetime
 from monitoramento import cpu
 from monitoramento import memory
 from monitoramento import disks
 from monitoramento import rede
+from monitoramento import arquivos
 
+
+def imprimir_arquivos():
+    lista = arquivos.listar_arquivos()
+
+    print("{:27} {:^27} {:^27} {:^27}".format("Tipo", "Tamanho", "Data de criação", "Nome"))
+    for i, k in lista.items():
+        print("{:27} {:^27} {} {:^27}".format(k[0], k[1], datetime.datetime.fromtimestamp(k[2]), i))
 
 def imprimir_info_cpu():
     print()
@@ -77,6 +85,7 @@ def iniciar_app():
         print(" --- escreva disco para informações sobre disco;")
         print(" --- escreva mem/memoria para informações sobre memória;")
         print(" --- escreva ip para informações sobre Rede;")
+        print(" --- escreva ls para informações sobre os  arquivos no diretoŕio atual;")
         print(" --- escreva resumo/t para informações resumidas;")
         print(" --- Escreva q/quit para sair;")
         print()
@@ -92,6 +101,8 @@ def iniciar_app():
             imprimir_info_rede()
         elif resultado == "resumo" or resultado == "t":
             imprimir_resumo()
+        elif resultado == "ls":
+            imprimir_arquivos()
         elif resultado == "q" or "quit":
             quit = True
 
