@@ -7,14 +7,18 @@ from monitoramento import memory
 from monitoramento import disks
 from monitoramento import rede
 from monitoramento import arquivos
+from monitoramento import processos
 
+
+def imprimir_processos():
+    processos.listar_processos()
 
 def imprimir_arquivos():
     lista = arquivos.listar_arquivos()
 
-    print("{:27} {:^27} {:^27} {:^27}".format("Tipo", "Tamanho", "Data de criação", "Nome"))
+    print("{:27} {:^27} {:^27}    {}".format("Tipo", "Tamanho", "Data de criação", "Nome"))
     for i, k in lista.items():
-        print("{:27} {:^27} {} {:^27}".format(k[0], k[1], datetime.datetime.fromtimestamp(k[2]), i))
+        print("{:27} {:^27} {}    {}".format(k[0], k[1], datetime.datetime.fromtimestamp(k[2]), i))
 
 def imprimir_info_cpu():
     print()
@@ -82,6 +86,7 @@ def iniciar_app():
     while not quit:
         print("MONITORAMENTO DE COMPUTADOR")
         print(" --- escreva cpu para informações sobre cpu;")
+        print(" --- escreva p para informações sobre os processos do usuário;")
         print(" --- escreva disco para informações sobre disco;")
         print(" --- escreva mem/memoria para informações sobre memória;")
         print(" --- escreva ip para informações sobre Rede;")
@@ -103,6 +108,8 @@ def iniciar_app():
             imprimir_resumo()
         elif resultado == "ls":
             imprimir_arquivos()
+        elif resultado == "p":
+            imprimir_processos()
         elif resultado == "q" or "quit":
             quit = True
 
